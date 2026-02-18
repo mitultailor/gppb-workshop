@@ -58,7 +58,7 @@ An AI agent that:
 
 **Settings:**
 ```
-Name: Public Facility Review Manager
+Name: PublicPulse
 
 Description: 
 Analyzes library reviews and sends automated responses
