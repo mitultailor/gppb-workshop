@@ -1,5 +1,5 @@
-# Copilot Studio Workshop - SIMPLIFIED VERSION
-## Library Review Response Automation (90 Minutes)
+# Copilot Studio Workshop
+## Library Review Response Automation
 
 ---
 
@@ -7,11 +7,9 @@
 
 An AI agent that:
 1. ✅ Finds negative library reviews
-2. ✅ Analyzes sentiment with AI
-3. ✅ Categorizes issues automatically  
-4. ✅ Sends personalized email responses
+2. ✅ Categorizes issues automatically  
+3. ✅ Sends personalized email responses
 
-**No support tickets. No complex architecture. Just core automation.**
 
 ---
 
@@ -22,18 +20,6 @@ An AI agent that:
 - AI Builder credits
 - Microsoft 365 email
 - CSV file (provided)
-
----
-
-## 🗓️ Workshop Agenda
-
-| Time | Activity | Duration |
-|------|----------|----------|
-| 0-15 | Setup & Data Import | 15 mins |
-| 15-35 | Build Copilot Agent | 20 mins |
-| 35-55 | Create AI Builder Prompt | 20 mins |
-| 55-90 | Build Automation Flow | 35 mins |
-| 90 | Wrap Up | - |
 
 ---
 
@@ -53,26 +39,32 @@ An AI agent that:
 
 ---
 
-## 🤖 PART 2: Build Copilot Agent (20 mins)
+## 🤖 PART 2: Build Copilot Agent
 
-### Step 1: Create Agent
+### Step 1: Environments in Copilot Studio
+
+<img width="653" height="525" alt="image" src="https://github.com/user-attachments/assets/9e77e21b-5799-4843-a75b-4eadc0c9f039" />
+
+<img width="454" height="526" alt="image" src="https://github.com/user-attachments/assets/29848fa0-98b5-4082-acc0-efd56d5fb45a" />
+
+
+### Step 2: Create Agent
+
+<img width="975" height="529" alt="image" src="https://github.com/user-attachments/assets/0c6d1a4b-825d-45e4-9fa8-4e0341c2aed8" />
 
 1. Go to **Copilot Studio** (copilotstudio.microsoft.com)
-2. Click **Create** → **New copilot**
-3. Choose **Skip to configure**
+2. Click **Agents** → **Create blank agent**
+
 
 **Settings:**
 ```
-Name: Library Review Assistant
+Name: Public Facility Review Manager
 
 Description: 
 Analyzes library reviews and sends automated responses
 
 Instructions:
-You are a helpful assistant for the City Library System. 
-You help analyze customer reviews and facilitate automated 
-responses to negative feedback. You maintain a professional, 
-empathetic tone and prioritize customer satisfaction.
+You are a helpful AI assistant for the City Library System. Your role is to: - Analyze customer reviews from our four library branches (Downtown, Westside, Eastside, and North Branch) - Identify negative or concerning feedback that requires immediate attention - Help library management understand review trends and common issues - Facilitate quick responses to customer concerns - Maintain a professional, empathetic, and solution-oriented tone - Prioritize customer satisfaction and service quality When discussing reviews: - Always acknowledge the customer's experience - Focus on actionable insights - Suggest appropriate next steps - Escalate urgent issues (safety, major complaints) immediately Review flagging criteria: - Rating of 1-2 stars = High priority - Keywords: "unsafe", "broken", "rude", "disgusting", "unacceptable" = Flagged - Multiple complaints about same issue = Escalate
 ```
 
 4. Click **Create**
@@ -83,8 +75,8 @@ empathetic tone and prioritize customer satisfaction.
 
 1. Go to **Knowledge** tab
 2. Click **+ Add knowledge**
-3. Select **Dataverse**
-4. Choose **Library Reviews** table
+3. Select **AI Search**
+4. Choose **Library Reviews** Index
 5. Click **Add**
 6. Wait for indexing (~30 seconds)
 
@@ -116,15 +108,20 @@ User: "Which branch has the most complaints?"
 
 1. Go to **Topics** tab
 2. Click **+ Add a topic** → **From blank**
-3. Name: **"Process Flagged Reviews"**
+3. Name: **"Analyze Flagged Reviews"**
 
 **Trigger phrases:**
 ```
-- Process flagged reviews
-- Send responses to negative reviews
-- Respond to complaints
-- Handle bad reviews
-- Send automated responses
+- Show me flagged reviews
+- What negative reviews do we have
+- Show concerning feedback
+- Which reviews need attention
+- Show me problem reviews
+- Display urgent reviews
+- What complaints came in today
+- Show me reviews that need responses
+- Find reviews with issues
+- What are customers complaining about
 ```
 
 ---
@@ -149,8 +146,14 @@ Options:
 
 Save response as: Topic.BranchFilter
 ```
+**Node 3: Message**
+```
+I'll analyze our flagged reviews - these are reviews with ratings of 2 stars  or below, or those containing concerning keywords.
 
-**Node 3: Call an action**
+Let me search our review database...
+```
+
+**Node 4: Call an action**
 - We'll create this flow next
 - For now, add placeholder
 
@@ -158,13 +161,13 @@ Save response as: Topic.BranchFilter
 
 ---
 
-## 🧠 PART 3: AI Builder (20 mins)
+## 🧠 PART 3: AI Builder
 
 ### Step 1: Create GPT Categorization Prompt
 
 1. Go to **Power Apps** (make.powerapps.com)
-2. Left menu → **AI Builder** → **Create**
-3. Choose **Prompt**
+2. Left menu → **AI hub**
+3. Choose **Prompts**
 4. Name: **"Review Categorizer"**
 
 **Prompt text:**
@@ -224,7 +227,7 @@ BranchName: "Downtown Branch"
 1. Go to **Power Automate** (make.powerautomate.com)
 2. Click **Create** → **Automated cloud flow**
 3. Name: **"GetFilteredReviews"**
-4. Trigger: **Copilot Studio**
+4. Trigger: **When an agent calls the flow**
 
 **Trigger inputs:**
 - BranchName (String)
@@ -236,7 +239,7 @@ BranchName: "Downtown Branch"
 - Table: Library Reviews
 - Filter rows: 
 ```
-BranchName eq '@{triggerBody()?['BranchName']}' and Rating le 2
+cr5fc_branchname eq '@{triggerBody()?['BranchName']}' and cr5fc_rating le 2
 ```
 - Row limit: 20
 
@@ -249,7 +252,15 @@ BranchName eq '@{triggerBody()?['BranchName']}' and Rating le 2
 
 ---
 
-**Step 3: Apply to each**
+
+**Step 3: Initialize variable**
+- Name: DisplayText
+- Type: String
+- Value: ""
+
+---
+
+**Step 4: Apply to each**
 - Select output: value (from List rows)
 
 **Inside loop:**
@@ -270,22 +281,36 @@ BranchName eq '@{triggerBody()?['BranchName']}' and Rating le 2
 
 *Note: Replace cr977_ with your actual Dataverse column prefix*
 
+**Action: Append to string variable**
+- Name: DisplayText
+- Value:
+
+```json
+Review # @{items('Apply_to_each')?['cr5fc_reviewid']}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Name:     @{items('Apply_to_each')?['cr5fc_reviewername']} 
+Email:    @{items('Apply_to_each')?['cr5fc_revieweremail']} 
+Branch:   @{items('Apply_to_each')?['cr5fc_branchname']} 
+Rating:    @{items('Apply_to_each')?['cr5fc_rating']}⭐ 
+Comment:  @{items('Apply_to_each')?['cr5fc_reviewtext']}  
+```
 ---
 
-**Step 4: Return to Copilot**
+**Step 5: Return to Copilot**
 - ReviewCount (Number): `@{length(variables('ReviewsArray'))}`
 - ReviewsJSON (String): `@{string(variables('ReviewsArray'))}`
 - Summary (String): `Found @{length(variables('ReviewsArray'))} flagged reviews`
+- DisplayText (String): `@{string(variables('DisplayText'))}`
 
 **Save and test flow**
 
 ---
 
-### Flow 2: SendAutomatedResponses (25 mins)
+### Flow 2: SendAutomatedResponses
 
 1. **Create** → **Automated cloud flow**
 2. Name: **"SendAutomatedResponses"**
-3. Trigger: **Copilot Studio**
+3. Trigger: **When an agent calls the flow**
 
 **Trigger inputs:**
 - ReviewsJSON (String)
@@ -328,14 +353,7 @@ BranchName eq '@{triggerBody()?['BranchName']}' and Rating le 2
 
 ---
 
-**3a. AI Builder - Sentiment Analysis**
-- Action: **Analyze positive or negative sentiment in text**
-- Text: `@{items('Apply_to_each')?['ReviewText']}`
-- Language: English
-
----
-
-**3b. AI Builder - Create text with GPT**
+**3a. AI Builder - Create text with GPT**
 - Prompt: Select "Review Categorizer"
 - ReviewText: `@{items('Apply_to_each')?['ReviewText']}`
 - Rating: `@{items('Apply_to_each')?['Rating']}`
@@ -343,7 +361,7 @@ BranchName eq '@{triggerBody()?['BranchName']}' and Rating le 2
 
 ---
 
-**3c. Parse JSON** (GPT output)
+**3b. Parse JSON** (GPT output)
 - Content: `@{outputs('AI_Builder_-_Create_text_with_GPT')?['body/text']}`
 - Schema:
 ```json
@@ -353,18 +371,17 @@ BranchName eq '@{triggerBody()?['BranchName']}' and Rating le 2
         "category": {"type": "string"},
         "urgency": {"type": "string"},
         "primaryIssue": {"type": "string"},
-        "shouldRespond": {"type": "boolean"}
+        "shouldRespond": {"type": "string"}
     }
 }
 ```
 
 ---
 
-**3d. Condition**
+**3c. Condition**
 ```
 @or(
-  less(outputs('AI_Builder_-_Analyze_sentiment')?['body/SentimentScore'], 0.5),
-  equals(body('Parse_JSON_GPT')?['shouldRespond'], true)
+  equals(body('Parse_JSON_GPT')?['shouldRespond'], "true")
 )
 ```
 
@@ -372,7 +389,7 @@ BranchName eq '@{triggerBody()?['BranchName']}' and Rating le 2
 
 ---
 
-**3e. Compose email body**
+**3d. Compose email body**
 ```
 Dear @{items('Apply_to_each')?['ReviewerName']},
 
@@ -398,14 +415,13 @@ City Library System Customer Care Team
 
 ---
 This response was generated using AI analysis:
-• Sentiment Score: @{outputs('AI_Builder_-_Analyze_sentiment')?['body/SentimentScore']}
 • Category: @{body('Parse_JSON_GPT')?['category']}
 • Urgency: @{body('Parse_JSON_GPT')?['urgency']}
 ```
 
 ---
 
-**3f. Send email**
+**3e. Send email**
 - Action: **Office 365 Outlook - Send an email (V2)**
 - To: `@{items('Apply_to_each')?['ReviewerEmail']}`
 - Subject: `Re: Your Feedback on @{items('Apply_to_each')?['BranchName']}`
@@ -414,7 +430,7 @@ This response was generated using AI analysis:
 
 ---
 
-**3g. Increment variable**
+**3f. Increment variable**
 - Name: SuccessCount
 - Value: 1
 
@@ -448,6 +464,7 @@ Go back to Copilot Studio → Your topic
   - Topic.ReviewCount
   - Topic.ReviewsJSON
   - Topic.Summary
+  - Topic.DisplayText
 
 ---
 
@@ -456,18 +473,13 @@ Go back to Copilot Studio → Your topic
 
 **If YES:**
 
-**Node 5: Message**
+**Node 5: Question**
 ```
 {Topic.Summary}
 
 Would you like me to send automated responses to these reviews?
 Each email will be personalized based on AI analysis.
-```
 
----
-
-**Node 6: Question**
-```
 Options:
 ○ Yes, send personalized responses
 ○ No, just show me details
@@ -477,32 +489,35 @@ Save as: Topic.UserConfirm
 
 ---
 
-**Node 7: Condition**
+**Node 6: Condition**
 - Topic.UserConfirm equals "Yes, send personalized responses"
 
 **If YES:**
 
-**Node 8: Message**
+**Node 7: Message**
 ```
 Processing reviews... This will take a moment.
 ```
 
 ---
 
-**Node 9: Call an action**
+**Node 8: Call an action**
 - Action: SendAutomatedResponses
 - Input: ReviewsJSON = Topic.ReviewsJSON
 - Save outputs as:
+  - Topic.TotalProcessed
+  - Topic.SuccessfullySent
   - Topic.ResultMessage
+  
 
 ---
 
-**Node 10: Message**
+**Node 9: Message**
 ```
-✅ {Topic.ResultMessage}
+{Topic.ResultMessage}
 
 Each reviewer received a personalized email based on:
-• AI sentiment analysis
+
 • Issue categorization
 • Urgency assessment
 
@@ -511,14 +526,14 @@ All emails have been sent successfully!
 
 **If NO (don't send):**
 
-**Node 11: Message**
+**Node 10: Message**
 ```
-No problem! The reviews are available in the system whenever you're ready.
+{Topic.DisplayText}
 ```
 
 **If ReviewCount = 0:**
 
-**Node 12: Message**
+**Node 11: Message**
 ```
 Good news! No flagged reviews found for {Topic.BranchFilter}.
 All recent reviews meet our quality standards.
@@ -526,7 +541,7 @@ All recent reviews meet our quality standards.
 
 ---
 
-## 🧪 Testing (10 mins)
+##  Testing
 
 ### Test Scenario 1: End-to-End
 
@@ -548,10 +563,10 @@ User: "Yes, send personalized responses"
 
 Agent: [calls SendAutomatedResponses flow]
 
-Agent: "✅ Successfully sent 5 personalized responses
+Agent: "Successfully sent 5 personalized responses
        
        Each reviewer received a personalized email based on:
-       • AI sentiment analysis
+
        • Issue categorization
        • Urgency assessment"
 ```
@@ -572,7 +587,7 @@ Agent: [searches and returns relevant reviews]
 
 ---
 
-## 📊 What You've Built
+##  What You've Built
 
 ### Architecture:
 
@@ -595,14 +610,13 @@ Copilot Studio Agent
 
 ---
 
-## 💡 Key Capabilities Demonstrated
+##  Key Capabilities Demonstrated
 
 1. **Natural Language Interface**
    - Users ask questions in plain English
    - Agent understands intent
 
 2. **AI-Powered Analysis**
-   - Sentiment scoring (0-1)
    - Automatic categorization
    - Urgency assessment
 
@@ -618,7 +632,7 @@ Copilot Studio Agent
 
 ---
 
-## 🚀 Extensions (Post-Workshop)
+##  Extensions (Post-Workshop)
 
 Want to add more? Here's how:
 
