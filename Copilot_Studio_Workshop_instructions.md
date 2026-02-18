@@ -3,17 +3,17 @@
 
 ---
 
-## 🎯 What You'll Build
+##  What You'll Build
 
 An AI agent that:
-1. ✅ Finds negative library reviews
-2. ✅ Categorizes issues automatically  
-3. ✅ Sends personalized email responses
+1. Finds negative library reviews
+2. Categorizes issues automatically  
+3. Sends personalized email responses
 
 
 ---
 
-## 📦 What You Need
+##  What You Need
 
 - Copilot Studio access
 - Power Automate license
@@ -23,7 +23,7 @@ An AI agent that:
 
 ---
 
-## 📋 PART 1: Setup (15 mins)
+##  PART 1: Setup
 
 ### Step 1: Import CSV to Dataverse
 
@@ -39,7 +39,7 @@ An AI agent that:
 
 ---
 
-## 🤖 PART 2: Build Copilot Agent
+##  PART 2: Build Copilot Agent
 
 ### Step 1: Environments in Copilot Studio
 
@@ -71,7 +71,7 @@ You are a helpful AI assistant for the City Library System. Your role is to: - A
 
 ---
 
-### Step 2: Add Knowledge Source
+### Step 3: Add Knowledge Source
 
 1. Go to **Knowledge** tab
 2. Click **+ Add knowledge**
@@ -82,7 +82,7 @@ You are a helpful AI assistant for the City Library System. Your role is to: - A
 
 ---
 
-### Step 3: Enable Generative Answers
+### Step 4: Enable Generative Answers
 
 1. Go to **Settings** (gear icon)
 2. **Generative AI** section
@@ -91,7 +91,7 @@ You are a helpful AI assistant for the City Library System. Your role is to: - A
 
 ---
 
-### Step 4: Test Basic Q&A
+### Step 5: Test Basic Q&A
 
 In the **Test** panel, try:
 ```
@@ -104,7 +104,7 @@ User: "Which branch has the most complaints?"
 
 ---
 
-### Step 5: Create Topic
+### Step 6: Create Topic
 
 1. Go to **Topics** tab
 2. Click **+ Add a topic** → **From blank**
@@ -161,7 +161,7 @@ Let me search our review database...
 
 ---
 
-## 🧠 PART 3: AI Builder
+##  PART 3: AI Builder
 
 ### Step 1: Create GPT Categorization Prompt
 
@@ -220,9 +220,9 @@ BranchName: "Downtown Branch"
 
 ---
 
-## ⚡ PART 4: Power Automate Flows (35 mins)
+##  PART 4: Power Automate Flows
 
-### Flow 1: GetFilteredReviews (10 mins)
+### Flow 1: GetFilteredReviews
 
 1. Go to **Power Automate** (make.powerautomate.com)
 2. Click **Create** → **Automated cloud flow**
