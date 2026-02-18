@@ -106,9 +106,8 @@
 
 ---
 
-### ⚠️ Optional but Recommended
 
-#### **6. Azure Subscription (Optional - for AI Search demo)**
+#### **6. Azure Subscription (for AI Search demo)**
 - **What:** Azure account to create AI Search service
 - **Cost:** Free tier available, OR ~$75/month for Basic tier
 - **Used for:** Advanced semantic search capabilities (optional module)
@@ -118,7 +117,6 @@
 - Azure for Students: https://azure.microsoft.com/free/students (if eligible)
 - Company Azure subscription (ask IT)
 
-**Note:** Workshop works WITHOUT Azure - we'll use Dataverse only for the main demo. Azure AI Search is discussed as an extension.
 
 ---
 
@@ -144,7 +142,6 @@
 ✅ **Operating System:**
 - Windows 10/11
 - macOS 10.15+
-- Linux (Chrome browser required)
 
 ✅ **Browser (CRITICAL):**
 - **Recommended:** Microsoft Edge (Chromium) or Google Chrome (latest version)
@@ -156,13 +153,6 @@
 - Access to *.microsoft.com, *.azure.com domains
 - No corporate firewall blocking Power Platform
 
-✅ **Screen Resolution:**
-- Minimum: 1366x768
-- Recommended: 1920x1080 (dual monitor setup ideal)
-
-✅ **RAM:**
-- Minimum: 8GB
-- Recommended: 16GB (for smooth multitasking)
 
 ---
 
@@ -180,9 +170,6 @@
    - Step-by-step instructions
    - Reference during the workshop
 
-**Where to save:**
-- Create folder: `C:\Workshop\CopilotStudio\` (Windows)
-- Or: `~/Workshop/CopilotStudio/` (Mac/Linux)
 
 ---
 
@@ -206,7 +193,6 @@
    - Can you see "Tables"?
    - Can you create a new table?
 
-**If ANY of these fail, contact your IT department NOW!**
 
 ---
 
@@ -228,20 +214,10 @@
 
 **If this fails:** Your Power Automate license may have issues. Contact IT.
 
----
-
-#### **Task 3: Enable Required Settings (5 mins)**
-
-1. Go to https://copilotstudio.microsoft.com
-2. Click ⚙️ (gear icon) → **Settings**
-3. Check these are enabled:
-   - ✅ Generative AI (toggle ON)
-   - ✅ Generative answers (toggle ON)
-4. Click **Save**
 
 ---
 
-#### **Task 4: Test AI Builder Access (5 mins - Optional)**
+#### **Task 3: Test AI Builder Access (5 mins - Optional)**
 
 1. Go to https://make.powerapps.com
 2. Left menu → **AI Builder** → **Explore**
@@ -345,16 +321,6 @@
 
 ---
 
-## 🆘 Need Help Before the Workshop?
-
-**Contact Information:**
-
-📧 **Email:** [instructor-email@domain.com]  
-💬 **Teams:** [Workshop Support Channel]  
-📞 **Phone:** [support-number]  
-
-**Response time:** Within 24 hours on business days
-
 **Common questions:**
 - "I can't access Copilot Studio" → Contact IT for license
 - "I don't have AI Builder credits" → Sign up for trial
@@ -367,7 +333,6 @@
 
 **What to bring:**
 - ✅ Laptop with charger
-- ✅ Second monitor (optional but helpful)
 - ✅ Notebook and pen for notes
 - ✅ Downloaded workshop files
 - ✅ Login credentials ready
@@ -400,7 +365,6 @@ By the end of the workshop, you'll have:
 ✅ Take-home materials:
 - Complete working solution
 - Workshop guide
-- Code templates
 - Extension ideas
 
 ---
@@ -422,9 +386,7 @@ By the end of the workshop, you'll have:
 
 - [ ] All accounts accessible
 - [ ] Laptop fully functional
-- [ ] Internet connection stable
 - [ ] Power adapter packed
-- [ ] Workshop materials downloaded
 - [ ] Environment permissions confirmed
 - [ ] AI Builder credits available
 - [ ] No conflicting meetings scheduled
@@ -437,15 +399,11 @@ By the end of the workshop, you'll have:
 
 You're all set! If you've completed this checklist, you're ready for an amazing hands-on experience building intelligent automation.
 
-**Workshop starts:** [Date & Time]  
-**Location/Link:** [Details]  
+**Workshop starts:** 12:40 PM PST
 **Duration:** 90 minutes  
 
 Looking forward to building with you! 💪
 
----
-
-*Questions? Email [instructor-email] or message in the workshop Teams channel.*
 
 ---
 
@@ -474,4 +432,4 @@ Looking forward to building with you! 💪
 
 ---
 
-*Version 1.0 | Last Updated: [Date]*
+*Version 1.0 | Last Updated: [Feb 18,2026]*
