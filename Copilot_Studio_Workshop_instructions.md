@@ -18,12 +18,20 @@ An AI agent that:
 - Copilot Studio access
 - Power Automate license
 - AI Builder credits
+- Azure Subscription
 - Microsoft 365 email
 - CSV file (provided)
 
 ---
+## PART 1: AI Search, Azure Open AI and model setup
 
-##  PART 1: Setup
+1. Create AI Search service
+2. Create Azure Open AI service
+3. Create Storage account
+4. Deploy model in AI Foundry
+5. Create Search index
+
+##  PART 2: Setup
 
 ### Step 1: Import CSV to Dataverse
 
@@ -39,7 +47,7 @@ An AI agent that:
 
 ---
 
-##  PART 2: Build Copilot Agent
+##  PART 3: Build Copilot Agent
 
 ### Step 1: Environments in Copilot Studio
 
@@ -161,7 +169,7 @@ Let me search our review database...
 
 ---
 
-##  PART 3: AI Builder
+##  PART 4: AI Builder
 
 ### Step 1: Create GPT Categorization Prompt
 
@@ -220,7 +228,7 @@ BranchName: "Downtown Branch"
 
 ---
 
-##  PART 4: Power Automate Flows
+##  PART 5: Power Automate Flows
 
 ### Flow 1: GetFilteredReviews
 
